@@ -323,10 +323,16 @@ public class AdjacencyListGraphTest {
     }
 
     public int numIslands(Graph graph) {
-        Queue<Node<String>> qq = new LinkedList<>();
-        Set<Node<String>> isEnqueued = new HashSet<>();
-        
+        Set<Node<String>> islandsSet;
+        int results = 0;
 
+        islandsSet = graph.getNodes();
+        for (Node<String> node : islandsSet) {
+            if (graph.getNeighbors(node).isEmpty()) {
+                results++;
+            }
+        }
+        return results;
     }
 
     @Test

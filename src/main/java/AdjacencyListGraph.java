@@ -46,6 +46,8 @@ public class AdjacencyListGraph<E> implements Graph<E> {
     public void addTwoWayEdge(Node<E> start, Node<E> end) {
         checkNodesExists(start, end);
         addEdge(start, end, 0);
+        addEdge(end, start, 0);
+
     }
 
     @Override
@@ -87,8 +89,4 @@ public class AdjacencyListGraph<E> implements Graph<E> {
             throw new IllegalArgumentException(message);
         }
     }
-
-//    public void breadthFirstTraversal(Node<E> node) {
-//        boolean visited[] = new boolean[];
-//    }
 }
