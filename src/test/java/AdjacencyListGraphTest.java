@@ -242,6 +242,26 @@ public class AdjacencyListGraphTest {
     }
 
     public List<Node<String>> breadthFirstTraversal(Graph<String> graph, Node<String> start) {
+        Queue<Node<String>> qq = new LinkedList<>();
+        Set<Node<String>> isEnqueued = new HashSet<>();
+        List<Node<String>> testList = new ArrayList<>();
+
+        qq.add(start);
+        isEnqueued.add(start);
+
+        while (!qq.isEmpty()) {
+            Node<String> current = qq.poll();
+            System.out.print(current + " ");
+            testList.add(current);
+
+            for (Node<String> neighbor : graph.getNeighbors(current)) {
+                if (!isEnqueued.contains(neighbor)) {
+                    qq.add(neighbor);
+                    isEnqueued.add(neighbor);
+                }
+            }
+        }
+        return testList;
     }
 
     @Test
@@ -269,6 +289,17 @@ public class AdjacencyListGraphTest {
     }
 
     public int tripCost(Graph graph, List<Node<String>> itinerary) {
+        int result = 0;
+        for (int i = 0; i < itinerary.size() - 1; i++) {
+            try {
+                result = result + graph.getEdge(itinerary.get(i), itinerary.get(i + 1)).getCost();
+            }
+            catch (Exception e) {
+                System.out.println("Cannot Connect itinerary");
+                return 0;
+            }
+        }
+        return result;
     }
 
     @Test
@@ -292,5 +323,42 @@ public class AdjacencyListGraphTest {
     }
 
     public int numIslands(Graph graph) {
+        Set<Node<String>> islandsSet;
+        int results = 0;
+
+        islandsSet = graph.getNodes();
+        for (Node<String> node : islandsSet) {
+            if (graph.getNeighbors(node).isEmpty()) {
+                results++;
+            }
+        }
+        return results;
     }
+
+    @Test
+    public void visitFromBellingham() {
+        visitAllCities(washington, bellingham);
+
+    }
+
+    private void visitAllCities(Graph<String> graph, Node<String> start) {
+        Queue<Node<String>> qq = new LinkedList<>();
+        Set<Node<String>> isEnqueued = new HashSet<>();
+
+        qq.add(start);
+        isEnqueued.add(start);
+
+        while (!qq.isEmpty()) {
+            Node<String> current = qq.poll();
+            System.out.println("visiting " + current);
+
+            for (Node<String> neighbor : graph.getNeighbors(current)) {
+                if (!isEnqueued.contains(neighbor)) {
+                    qq.add(neighbor);
+                    isEnqueued.add(neighbor);
+                }
+            }
+        }
+    }
+
 }
