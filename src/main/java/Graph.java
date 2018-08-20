@@ -17,4 +17,5 @@ public interface Graph<E> {
     Set<Node<E>> getNeighbors(Node<E> node);
     boolean isConnected(Node<E> start, Node<E> end);
     Edge<E> getEdge(Node<E> start, Node<E> end);
+
 }
