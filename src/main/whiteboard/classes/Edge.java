@@ -1,3 +1,5 @@
+package whiteboard.classes;
+
 public class Edge<E> {
     private int cost;
     private Node<E> start;
@@ -9,15 +11,15 @@ public class Edge<E> {
         this.cost = cost;
     }
 
-    public int getCost() {
-        return cost;
-    }
-
     public Node<E> getStart() {
        return start;
     }
 
     public Node<E> getEnd() {
         return end;
+    }
+
+    public int getCost() {
+        return this.cost;
     }
 }

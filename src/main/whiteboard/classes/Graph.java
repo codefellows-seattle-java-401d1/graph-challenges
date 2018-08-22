@@ -1,3 +1,4 @@
+package whiteboard.classes;
 import java.util.Set;
 
 public interface Graph<E> {
