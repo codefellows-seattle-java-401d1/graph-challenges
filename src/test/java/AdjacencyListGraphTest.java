@@ -263,53 +263,75 @@ public class AdjacencyListGraphTest {
         return al;
     }
 
-//    @Test
-//    public void possibleDirectBusinessTrip() {
-//        List<Node<String>> itinerary = new ArrayList<>();
-//        itinerary.add(bellingham);
-//        itinerary.add(seattle);
-//        itinerary.add(ellensberg);
-//        itinerary.add(yakima);
-//        itinerary.add(richland);
-//        itinerary.add(wallaWalla);
-//
-//        assertEquals(368, tripCost(washington, itinerary));
-//    }
+    @Test
+    public void possibleDirectBusinessTrip() {
+        List<Node<String>> itinerary = new ArrayList<>();
+        itinerary.add(bellingham);
+        itinerary.add(seattle);
+        itinerary.add(ellensberg);
+        itinerary.add(yakima);
+        itinerary.add(richland);
+        itinerary.add(wallaWalla);
 
-//    @Test
-//    public void impossibleDirectBusinessTrip() {
-//        List<Node<String>> itinerary = new ArrayList<>();
-//        itinerary.add(bellingham);
-//        itinerary.add(seattle);
-//        itinerary.add(ellensberg);
-//        itinerary.add(wallaWalla);
-//
-//        assertEquals(0, tripCost(washington, itinerary));
-//    }
+        assertEquals(368, tripCost(washington, itinerary));
+    }
 
-//    public int tripCost(Graph graph, List<Node<String>> itinerary) {
-//    }
+    @Test
+    public void impossibleDirectBusinessTrip() {
+        List<Node<String>> itinerary = new ArrayList<>();
+        itinerary.add(bellingham);
+        itinerary.add(seattle);
+        itinerary.add(ellensberg);
+        itinerary.add(wallaWalla);
 
-//    @Test
-//    public void islands() {
-//        Graph<String> usa = new AdjacencyListGraph<>();
-//
-//        Node<String> alaska = new Node<>("Alaska");
-//        Node<String> hawaii = new Node<>("Hawaii");
-//        Node<String> washington = new Node<>("Washington");
-//        Node<String> oregon = new Node<>("Oregon");
-//
-//        usa.addNode(alaska);
-//        usa.addNode(hawaii);
-//        usa.addNode(washington);
-//        usa.addNode(oregon);
-//
-//        usa.addTwoWayEdge(washington, oregon);
-//
-//        assertEquals(0, numIslands(this.washington));
-//        assertEquals(2, numIslands(usa));
-//    }
+        assertEquals(0, tripCost(washington, itinerary));
+    }
 
-//    public int numIslands(Graph graph) {
-//    }
+    public int tripCost(Graph graph, List<Node<String>> itinerary) {
+        int cost = 0;
+
+        for (int i = 0; i < itinerary.size() - 1; i++) {
+            Node current = itinerary.get(i);
+            Node next = itinerary.get(i + 1);
+
+            if (graph.isConnected(current, next)) {
+                Edge edge = graph.getEdge(current, next);
+                cost += edge.getCost();
+            } else {
+                return 0;
+            }
+        }
+        return cost;
+    }
+
+    @Test
+    public void islands() {
+        Graph<String> usa = new AdjacencyListGraph<>();
+
+        Node<String> alaska = new Node<>("Alaska");
+        Node<String> hawaii = new Node<>("Hawaii");
+        Node<String> washington = new Node<>("Washington");
+        Node<String> oregon = new Node<>("Oregon");
+
+        usa.addNode(alaska);
+        usa.addNode(hawaii);
+        usa.addNode(washington);
+        usa.addNode(oregon);
+
+        usa.addTwoWayEdge(washington, oregon);
+
+        assertEquals(0, numIslands(this.washington));
+        assertEquals(2, numIslands(usa));
+    }
+
+    public int numIslands(Graph<String> graph) {
+        int island = 0;
+
+        for (Node<String> node : graph.getNodes()) {
+            if (graph.getNeighbors(node).isEmpty()) {
+                island++;
+            }
+        }
+        return island;
+    }
 }
