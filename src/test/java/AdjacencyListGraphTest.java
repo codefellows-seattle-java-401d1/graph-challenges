@@ -242,6 +242,25 @@ public class AdjacencyListGraphTest {
     }
 
     public List<Node<String>> breadthFirstTraversal(Graph<String> graph, Node<String> start) {
+        List<Node<String>> al = new ArrayList<>();
+        Queue<Node<String>> qq = new LinkedList<>();
+        Set<Node<String>> enqueue = new HashSet<>();
+
+        qq.add(start);
+        enqueue.add(start);
+
+        while (!qq.isEmpty()) {
+            Node<String> current = qq.remove();
+            al.add(current);
+
+            for (Node<String> node : graph.getNeighbors(current)) {
+                if (!enqueue.contains(node)) {
+                    qq.add(node);
+                    enqueue.add(node);
+                }
+            }
+        }
+        return al;
     }
 
     @Test
@@ -269,6 +288,20 @@ public class AdjacencyListGraphTest {
     }
 
     public int tripCost(Graph graph, List<Node<String>> itinerary) {
+        int cost = 0;
+
+        for (int i = 0; i < itinerary.size() - 1; i++) {
+            Node current = itinerary.get(i);
+            Node next = itinerary.get(i + 1);
+
+            if (graph.isConnected(current, next)) {
+                Edge edge = graph.getEdge(current, next);
+                cost += edge.getCost();
+            } else {
+                return 0;
+            }
+        }
+        return cost;
     }
 
     @Test
@@ -291,6 +324,14 @@ public class AdjacencyListGraphTest {
         assertEquals(2, numIslands(usa));
     }
 
-    public int numIslands(Graph graph) {
+    public int numIslands(Graph<String> graph) {
+        int island = 0;
+
+        for (Node<String> node : graph.getNodes()) {
+            if (graph.getNeighbors(node).isEmpty()) {
+                island++;
+            }
+        }
+        return island;
     }
 }
