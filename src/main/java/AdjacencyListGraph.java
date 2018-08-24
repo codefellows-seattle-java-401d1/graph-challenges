@@ -19,7 +19,7 @@ public class AdjacencyListGraph<E> implements Graph<E> {
     }
 
     public Set<Edge<E>> getEdges() {
-        return null;
+        return edges;
     }
 
     @Override
@@ -29,18 +29,28 @@ public class AdjacencyListGraph<E> implements Graph<E> {
 
     @Override
     public void addEdge(Node<E> start, Node<E> end) {
+        checkNodesExists(start, end);
+        addEdge(start, end, 0);
     }
 
     @Override
     public void addEdge(Node<E> start, Node<E> end, int cost) {
+        Edge edge = new Edge(start, end, cost);
+
+        adjacencyList.get(start).add(end);
+        edges.add(edge);
     }
 
     @Override
     public void addTwoWayEdge(Node<E> start, Node<E> end) {
+        checkNodesExists(start, end);
+        addTwoWayEdge(start, end, 0);
     }
 
     @Override
     public void addTwoWayEdge(Node<E> start, Node<E> end, int cost) {
+        addEdge(start, end, cost);
+        addEdge(end, start, cost);
     }
 
     @Override
@@ -55,15 +65,22 @@ public class AdjacencyListGraph<E> implements Graph<E> {
 
     @Override
     public Edge<E> getEdge(Node<E> start, Node<E> end) {
-        return null;
+        checkNodesExists(start, end);
+        return costs.get(start).get(end);
     }
 
     private void checkNodesExists(Node<E> node1, Node<E> node2) {
+        checkNodesExists(node1);
+        checkNodesExists(node2);
     }
 
     // leverage method overloading and use plural naming even for the single node check
     // because it's way easier to write the same method name everywhere than to remember to
     // write either "node" vs "nodes" in "checkNodeExists" or "checkNodesExists"
     private void checkNodesExists(Node<E> node) {
+        if (!adjacencyList.containsKey(node)) {
+            String errorMsg = "Tried to access " + node + "; node not in graph";
+            throw new IllegalArgumentException();
+        }
     }
 }
