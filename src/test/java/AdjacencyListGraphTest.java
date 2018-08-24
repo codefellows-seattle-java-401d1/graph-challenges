@@ -109,84 +109,84 @@ public class AdjacencyListGraphTest {
     public void getEdge() {
         assertEquals(172, washington.getEdge(ellensberg, spokane).getCost());
     }
-//
-//    @Test
-//    public void addEdgeThrowsExceptions1() {
-//        boolean isException = false;
-//        try {
-//            washington.addEdge(seattle, unadded, 0);
-//        } catch (IllegalArgumentException e) {
-//            isException = true;
-//        }
-//        assertTrue(isException);
-//    }
-//
-//    @Test
-//    public void addEdgeThrowsExceptions2() {
-//        boolean isException = false;
-//        try {
-//           washington.addEdge(unadded, seattle, 0);
-//        } catch (IllegalArgumentException e) {
-//            isException = true;
-//        }
-//        assertTrue(isException);
-//    }
-//
-//    @Test
-//    public void addTwoWayEdgeThrowsExceptions() {
-//        boolean isException = false;
-//        try {
-//            washington.addTwoWayEdge(seattle, unadded, 0);
-//        } catch (IllegalArgumentException e) {
-//            isException = true;
-//        }
-//        assertTrue(isException);
-//    }
-//
-//    @Test
-//    public void getEdgeThrowsExceptions1() {
-//        boolean isException = false;
-//        try {
-//            washington.getEdge(seattle, unadded);
-//        } catch (IllegalArgumentException e) {
-//            isException = true;
-//        }
-//        assertTrue(isException);
-//    }
-//
-//    @Test
-//    public void getEdgeThrowsExceptions2() {
-//        boolean isException = false;
-//        try {
-//            washington.getEdge(unadded, seattle);
-//        } catch (IllegalArgumentException e) {
-//            isException = true;
-//        }
-//        assertTrue(isException);
-//    }
-//
-//    @Test
-//    public void isConnectedThrowsExceptions1() {
-//        boolean isException = false;
-//        try {
-//            washington.isConnected(seattle, unadded);
-//        } catch (IllegalArgumentException e) {
-//            isException = true;
-//        }
-//        assertTrue(isException);
-//    }
-//
-//    @Test
-//    public void isConnectedThrowsExceptions2() {
-//        boolean isException = false;
-//        try {
-//            washington.isConnected(unadded, seattle);
-//        } catch (IllegalArgumentException e) {
-//            isException = true;
-//        }
-//        assertTrue(isException);
-//    }
-//
+
+    @Test
+    public void addEdgeThrowsExceptions1() {
+        boolean isException = false;
+        try {
+            washington.addEdge(seattle, unadded, 0);
+        } catch (IllegalArgumentException e) {
+            isException = true;
+        }
+        assertTrue(isException);
+    }
+
+    @Test
+    public void addEdgeThrowsExceptions2() {
+        boolean isException = false;
+        try {
+           washington.addEdge(unadded, seattle, 0);
+        } catch (IllegalArgumentException e) {
+            isException = true;
+        }
+        assertTrue(isException);
+    }
+
+    @Test
+    public void addTwoWayEdgeThrowsExceptions() {
+        boolean isException = false;
+        try {
+            washington.addTwoWayEdge(seattle, unadded, 0);
+        } catch (IllegalArgumentException e) {
+            isException = true;
+        }
+        assertTrue(isException);
+    }
+
+    @Test
+    public void getEdgeThrowsExceptions1() {
+        boolean isException = false;
+        try {
+            washington.getEdge(seattle, unadded);
+        } catch (IllegalArgumentException e) {
+            isException = true;
+        }
+        assertTrue(isException);
+    }
+
+    @Test
+    public void getEdgeThrowsExceptions2() {
+        boolean isException = false;
+        try {
+            washington.getEdge(unadded, seattle);
+        } catch (IllegalArgumentException e) {
+            isException = true;
+        }
+        assertTrue(isException);
+    }
+
+    @Test
+    public void isConnectedThrowsExceptions1() {
+        boolean isException = false;
+        try {
+            washington.isConnected(seattle, unadded);
+        } catch (IllegalArgumentException e) {
+            isException = true;
+        }
+        assertTrue(isException);
+    }
+
+    @Test
+    public void isConnectedThrowsExceptions2() {
+        boolean isException = false;
+        try {
+            washington.isConnected(unadded, seattle);
+        } catch (IllegalArgumentException e) {
+            isException = true;
+        }
+        assertTrue(isException);
+    }
+
     @Test
     public void connectedness() {
         assertFalse(washington.isConnected(bellingham, tacoma));
@@ -200,7 +200,7 @@ public class AdjacencyListGraphTest {
         assertTrue(washington.isConnected(richland, spokane));
         assertTrue(washington.isConnected(richland, yakima));
     }
-//
+
 //    @Test
 //    public void traverseTest() {
 //        List<Node<String>> traversal = breadthFirstTraversal(washington, ellensberg);
@@ -240,10 +240,10 @@ public class AdjacencyListGraphTest {
 //            }
 //        }
 //    }
-//
-////    public List<Node<String>> breadthFirstTraversal(Graph<String> graph, Node<String> start) {
-////    }
-//
+
+//    public List<Node<String>> breadthFirstTraversal(Graph<String> graph, Node<String> start) {
+//    }
+
 //    @Test
 //    public void possibleDirectBusinessTrip() {
 //        List<Node<String>> itinerary = new ArrayList<>();
@@ -256,7 +256,7 @@ public class AdjacencyListGraphTest {
 //
 //        assertEquals(368, tripCost(washington, itinerary));
 //    }
-//
+
 //    @Test
 //    public void impossibleDirectBusinessTrip() {
 //        List<Node<String>> itinerary = new ArrayList<>();
@@ -267,10 +267,10 @@ public class AdjacencyListGraphTest {
 //
 //        assertEquals(0, tripCost(washington, itinerary));
 //    }
-//
+
 //    public int tripCost(Graph graph, List<Node<String>> itinerary) {
 //    }
-//
+
 //    @Test
 //    public void islands() {
 //        Graph<String> usa = new AdjacencyListGraph<>();
@@ -290,7 +290,7 @@ public class AdjacencyListGraphTest {
 //        assertEquals(0, numIslands(this.washington));
 //        assertEquals(2, numIslands(usa));
 //    }
-//
+
 //    public int numIslands(Graph graph) {
 //    }
 }

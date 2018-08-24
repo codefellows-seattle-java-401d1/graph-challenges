@@ -36,9 +36,12 @@ public class AdjacencyListGraph<E> implements Graph<E> {
 
     @Override
     public void addEdge(Node<E> start, Node<E> end, int cost) {
+        checkNodesExists(start, end);
+        Map<Node<E>, Edge> options = costs.get(start);
         Edge edge = new Edge(start, end, cost);
 
         adjacencyList.get(start).add(end);
+        options.put(end, edge);
         edges.add(edge);
     }
 
@@ -50,6 +53,7 @@ public class AdjacencyListGraph<E> implements Graph<E> {
 
     @Override
     public void addTwoWayEdge(Node<E> start, Node<E> end, int cost) {
+        checkNodesExists(start, end);
         addEdge(start, end, cost);
         addEdge(end, start, cost);
     }
@@ -83,7 +87,7 @@ public class AdjacencyListGraph<E> implements Graph<E> {
     private void checkNodesExists(Node<E> node) {
         if (!adjacencyList.containsKey(node)) {
             String errorMsg = "Tried to access " + node + "; node not in graph";
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(errorMsg);
         }
     }
 }
