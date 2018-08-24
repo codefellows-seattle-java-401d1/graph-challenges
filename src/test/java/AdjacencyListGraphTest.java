@@ -187,19 +187,19 @@ public class AdjacencyListGraphTest {
 //        assertTrue(isException);
 //    }
 //
-//    @Test
-//    public void connectedness() {
-//        assertFalse(washington.isConnected(bellingham, tacoma));
-//        assertFalse(washington.isConnected(vancouver, spokane));
-//        assertFalse(washington.isConnected(wallaWalla, yakima));
-//        assertFalse(washington.isConnected(seattle, olympia));
-//
-//        assertTrue(washington.isConnected(ellensberg, spokane));
-//        assertTrue(washington.isConnected(ellensberg, yakima));
-//
-//        assertTrue(washington.isConnected(richland, spokane));
-//        assertTrue(washington.isConnected(richland, yakima));
-//    }
+    @Test
+    public void connectedness() {
+        assertFalse(washington.isConnected(bellingham, tacoma));
+        assertFalse(washington.isConnected(vancouver, spokane));
+        assertFalse(washington.isConnected(wallaWalla, yakima));
+        assertFalse(washington.isConnected(seattle, olympia));
+
+        assertTrue(washington.isConnected(ellensberg, spokane));
+        assertTrue(washington.isConnected(ellensberg, yakima));
+
+        assertTrue(washington.isConnected(richland, spokane));
+        assertTrue(washington.isConnected(richland, yakima));
+    }
 //
 //    @Test
 //    public void traverseTest() {

@@ -25,6 +25,7 @@ public class AdjacencyListGraph<E> implements Graph<E> {
     @Override
     public void addNode(Node<E> node) {
         adjacencyList.put(node, new HashSet<>());
+        costs.put(node, new HashMap<>());
     }
 
     @Override
@@ -61,7 +62,8 @@ public class AdjacencyListGraph<E> implements Graph<E> {
 
     @Override
     public boolean isConnected(Node<E> start, Node<E> end) {
-        return false;
+        checkNodesExists(start, end);
+        return adjacencyList.get(start).contains(end);
     }
 
     @Override
