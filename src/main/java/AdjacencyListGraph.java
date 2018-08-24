@@ -4,17 +4,27 @@ import java.util.Map;
 import java.util.Set;
 
 public class AdjacencyListGraph<E> implements Graph<E> {
+    Map<Node<E>, Set<Node<E>>> adjacencyList;
+    Map<Node<E>, Map<Node<E>, Edge>> costs;
+    Set<Edge<E>> edges;
+
     public AdjacencyListGraph() {
+        adjacencyList = new HashMap<>();
+        costs = new HashMap<>();
+        edges = new HashSet<>();
     }
 
     public Set<Node<E>> getNodes() {
+        return adjacencyList.keySet();
     }
 
     public Set<Edge<E>> getEdges() {
+        return null;
     }
 
     @Override
     public void addNode(Node<E> node) {
+        adjacencyList.put(node, new HashSet<>());
     }
 
     @Override
@@ -35,14 +45,17 @@ public class AdjacencyListGraph<E> implements Graph<E> {
 
     @Override
     public Set<Node<E>> getNeighbors(Node<E> node) {
+        return null;
     }
 
     @Override
     public boolean isConnected(Node<E> start, Node<E> end) {
+        return false;
     }
 
     @Override
     public Edge<E> getEdge(Node<E> start, Node<E> end) {
+        return null;
     }
 
     private void checkNodesExists(Node<E> node1, Node<E> node2) {
