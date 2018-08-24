@@ -55,7 +55,8 @@ public class AdjacencyListGraph<E> implements Graph<E> {
 
     @Override
     public Set<Node<E>> getNeighbors(Node<E> node) {
-        return null;
+        checkNodesExists(node);
+        return adjacencyList.get(node);
     }
 
     @Override

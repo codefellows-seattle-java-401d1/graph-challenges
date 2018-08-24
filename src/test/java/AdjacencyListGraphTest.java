@@ -99,12 +99,12 @@ public class AdjacencyListGraphTest {
     public void getEdges() {
         assertEquals(20, washington.getEdges().size());
     }
-//
-//    @Test
-//    public void getNeighbors() {
-//        assertEquals(3, washington.getNeighbors(seattle).size());
-//    }
-//
+
+    @Test
+    public void getNeighbors() {
+        assertEquals(3, washington.getNeighbors(seattle).size());
+    }
+
     @Test
     public void getEdge() {
         assertEquals(172, washington.getEdge(ellensberg, spokane).getCost());
