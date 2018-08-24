@@ -201,48 +201,67 @@ public class AdjacencyListGraphTest {
         assertTrue(washington.isConnected(richland, yakima));
     }
 
-//    @Test
-//    public void traverseTest() {
-//        List<Node<String>> traversal = breadthFirstTraversal(washington, ellensberg);
-//
-//        Set<Node<String>> firstLevel = new HashSet<>();
-//        firstLevel.add(ellensberg);
-//
-//        Set<Node<String>> secondLevel = new HashSet<>();
-//        secondLevel.add(seattle);
-//        secondLevel.add(spokane);
-//        secondLevel.add(yakima);
-//
-//        Set<Node<String>> thirdLevel = new HashSet<>();
-//        thirdLevel.add(bellingham);
-//        thirdLevel.add(tacoma);
-//        thirdLevel.add(richland);
-//
-//        Set<Node<String>> fourthLevel = new HashSet<>();
-//        fourthLevel.add(olympia);
-//        fourthLevel.add(wallaWalla);
-//
-//        Set<Node<String>> fifthLevel = new HashSet<>();
-//        fifthLevel.add(vancouver);
-//
-//        for (int i = 0; i < traversal.size(); i++) {
-//            Node<String> current = traversal.get(i);
-//            if (i < firstLevel.size()) {
-//                assertTrue(firstLevel.contains(current));
-//            } else if (i < firstLevel.size() + secondLevel.size()) {
-//                assertTrue(secondLevel.contains(current));
-//            } else if (i < firstLevel.size() + secondLevel.size() + thirdLevel.size()) {
-//                assertTrue(thirdLevel.contains(current));
-//            } else if (i < firstLevel.size() + secondLevel.size() + thirdLevel.size() + fourthLevel.size()) {
-//                assertTrue(fourthLevel.contains(current));
-//            } else if (i < firstLevel.size() + secondLevel.size() + thirdLevel.size() + fourthLevel.size() + fifthLevel.size()) {
-//                assertTrue(fifthLevel.contains(current));
-//            }
-//        }
-//    }
+    @Test
+    public void traverseTest() {
+        List<Node<String>> traversal = breadthFirstTraversal(washington, ellensberg);
 
-//    public List<Node<String>> breadthFirstTraversal(Graph<String> graph, Node<String> start) {
-//    }
+        Set<Node<String>> firstLevel = new HashSet<>();
+        firstLevel.add(ellensberg);
+
+        Set<Node<String>> secondLevel = new HashSet<>();
+        secondLevel.add(seattle);
+        secondLevel.add(spokane);
+        secondLevel.add(yakima);
+
+        Set<Node<String>> thirdLevel = new HashSet<>();
+        thirdLevel.add(bellingham);
+        thirdLevel.add(tacoma);
+        thirdLevel.add(richland);
+
+        Set<Node<String>> fourthLevel = new HashSet<>();
+        fourthLevel.add(olympia);
+        fourthLevel.add(wallaWalla);
+
+        Set<Node<String>> fifthLevel = new HashSet<>();
+        fifthLevel.add(vancouver);
+
+        for (int i = 0; i < traversal.size(); i++) {
+            Node<String> current = traversal.get(i);
+            if (i < firstLevel.size()) {
+                assertTrue(firstLevel.contains(current));
+            } else if (i < firstLevel.size() + secondLevel.size()) {
+                assertTrue(secondLevel.contains(current));
+            } else if (i < firstLevel.size() + secondLevel.size() + thirdLevel.size()) {
+                assertTrue(thirdLevel.contains(current));
+            } else if (i < firstLevel.size() + secondLevel.size() + thirdLevel.size() + fourthLevel.size()) {
+                assertTrue(fourthLevel.contains(current));
+            } else if (i < firstLevel.size() + secondLevel.size() + thirdLevel.size() + fourthLevel.size() + fifthLevel.size()) {
+                assertTrue(fifthLevel.contains(current));
+            }
+        }
+    }
+
+    public List<Node<String>> breadthFirstTraversal(Graph<String> graph, Node<String> start) {
+        List<Node<String>> al = new ArrayList<>();
+        Queue<Node<String>> qq = new LinkedList<>();
+        Set<Node<String>> enqueue = new HashSet<>();
+
+        qq.add(start);
+        enqueue.add(start);
+
+        while (!qq.isEmpty()) {
+            Node<String> current = qq.remove();
+            al.add(current);
+
+            for (Node<String> node : graph.getNeighbors(current)) {
+                if (!enqueue.contains(node)) {
+                    qq.add(node);
+                    enqueue.add(node);
+                }
+            }
+        }
+        return al;
+    }
 
 //    @Test
 //    public void possibleDirectBusinessTrip() {
