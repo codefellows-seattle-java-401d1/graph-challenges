@@ -1,9 +1,18 @@
+package java;
+
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+import whiteboard.classes.Edge;
+import whiteboard.classes.Graph;
+import whiteboard.classes.Node;
+import whiteboard.classes.AdjacencyListGraph;
 
 import java.util.*;
 
-import static org.junit.Assert.*;
 
 public class AdjacencyListGraphTest {
     /* Washington State:
@@ -22,7 +31,7 @@ public class AdjacencyListGraphTest {
     vancouver                       walla walla
      */
 
-    private Graph<String> washington;
+    private AdjacencyListGraph<String> washington;
     private Node<String> bellingham;
     private Node<String> seattle;
     private Node<String> tacoma;
@@ -92,6 +101,9 @@ public class AdjacencyListGraphTest {
 
     @Test
     public void getNodes() {
+        System.out.println(washington);
+        System.out.println(washington.getNodes());
+        System.out.println(washington.getNodes().size());
         assertEquals(10, washington.getNodes().size());
     }
 
@@ -202,8 +214,32 @@ public class AdjacencyListGraphTest {
     }
 
     @Test
+    public void traversal(){
+        List<Node> checkList = new LinkedList();
+        // I-5 north to south
+        checkList.add(bellingham);
+        checkList.add(seattle);
+        checkList.add(tacoma);
+        checkList.add(olympia);
+        checkList.add(vancouver);
+
+        // I-90 west to east
+        checkList.add(ellensberg);
+
+        // north east of ellensberg
+        checkList.add(spokane);
+
+        // south east of ellensberg
+        checkList.add(yakima);
+        checkList.add(richland);
+        checkList.add(wallaWalla);
+
+        assertEquals(washington.DepthFirst(),checkList);
+    }
+
+    @Test
     public void traverseTest() {
-        List<Node<String>> traversal = breadthFirstTraversal(washington, ellensberg);
+        List<Node<String>> traversal = breadthFirstTraversal(washington, ellensberg );
 
         Set<Node<String>> firstLevel = new HashSet<>();
         firstLevel.add(ellensberg);
@@ -242,7 +278,27 @@ public class AdjacencyListGraphTest {
     }
 
     public List<Node<String>> breadthFirstTraversal(Graph<String> graph, Node<String> start) {
+        List returnList  = new ArrayList();
+        List toBeFound = new ArrayList<Node<String>>();
+        return breadthFirstTraversal(start,returnList, graph, toBeFound);
     }
+    private List<Node<String>> breadthFirstTraversal(Node<String> start, List returnValue, Graph<String> graph, List<Node<String>> toBeFound){
+        returnValue.add(start);
+        toBeFound.remove(start);
+        for(Node<String> currNode : graph.getNeighbors(start)){
+            if(!returnValue.contains(currNode)&&!toBeFound.contains(currNode)){
+                toBeFound.add(currNode);
+            }
+        }
+        while(toBeFound.size()>0){
+            breadthFirstTraversal(toBeFound.remove(0),returnValue,graph,toBeFound);
+        }
+//        for(Node<String> currNode : toBeFound){
+//            breadthFirstTraversal(currNode,returnValue,graph,toBeFound);
+//        }
+        return returnValue;
+    }
+
 
     @Test
     public void possibleDirectBusinessTrip() {
@@ -269,6 +325,24 @@ public class AdjacencyListGraphTest {
     }
 
     public int tripCost(Graph graph, List<Node<String>> itinerary) {
+        Node<String> prevNode = new Node<String>("test");
+        int count = 0;
+        int total=0;
+        for(Node<String>currNode:itinerary){
+            if(count==itinerary.size()){
+                return total;
+            }
+            if(graph.getEdge(prevNode,currNode)!=null){
+                total += graph.getEdge(prevNode,currNode).getCost();
+            }else{
+                if(count>0){
+                    return 0;
+                }
+            }
+            prevNode=currNode;
+            count++;
+        }
+        return total;
     }
 
     @Test
@@ -291,6 +365,19 @@ public class AdjacencyListGraphTest {
         assertEquals(2, numIslands(usa));
     }
 
-    public int numIslands(Graph graph) {
+    public int numIslands(Graph<String> graph) {
+        Set<Node<String>> nodeSet = graph.getNodes();
+        Set<Edge<String>> edgeSet = graph.getEdges();
+        int total = 0;
+        for(Node currNode : nodeSet){
+            Boolean found = false;
+            for(Edge currEdge : edgeSet){
+                if(currEdge.getStart()==currNode||currEdge.getEnd()==currNode){
+                    found=true;
+                }
+            }
+            if(found==false){total++;}
+        }
+        return total;
     }
 }
